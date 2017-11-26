@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { NgCssModel } from './modules/interfaces/ngCss.model';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,9 +10,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 
-  inp: {
-    css: any
-  } = {
+  ngCss: NgCssModel = {
     css: {
       'color': 'red',
       'font-size': '50px',
@@ -19,6 +19,6 @@ export class AppComponent {
   };
 
   handleClick() {
-    this.inp.css.color = 'blue';
+    this.ngCss.css.color = 'blue';
   }
 }

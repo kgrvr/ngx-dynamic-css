@@ -18,7 +18,7 @@ export class CssDirectiveDirective implements AfterViewInit, OnChanges {
 
   ngOnChanges(changes) { }
 
-  applyCss() {
+  private applyCss() {
     const native = this._elementRef.nativeElement;
     if (native instanceof HTMLElement) {
       const css = this.ngCss.css;
