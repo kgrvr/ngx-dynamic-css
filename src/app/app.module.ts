@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-
+import { CssDirectiveModule } from './modules/css-directive/css-directive.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    CssDirectiveModule
   ],
   providers: [],
   bootstrap: [AppComponent]
