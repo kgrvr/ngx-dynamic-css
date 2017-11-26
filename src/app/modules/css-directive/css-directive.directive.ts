@@ -1,35 +1,45 @@
-import { Directive, Input, AfterViewInit, OnChanges, ElementRef } from '@angular/core';
+import { Directive, Input, AfterViewInit, OnChanges, ElementRef, SimpleChanges } from '@angular/core';
 
 // Models
 import { NgCssModel } from '../interfaces/ngCss.model';
 
 @Directive({
-  selector: '[ngCss]'
+    selector: '[ngCss]'
 })
 export class CssDirectiveDirective implements AfterViewInit, OnChanges {
 
-  @Input() ngCss: NgCssModel;
+    @Input() ngCss: NgCssModel | NgCssModel[];
 
-  constructor(private _elementRef: ElementRef) { }
+    private _nativeElement: HTMLElement;
 
-  ngAfterViewInit() {
-    this.applyCss();
-  }
-
-  ngOnChanges(changes) { }
-
-  private applyCss() {
-    const native = this._elementRef.nativeElement;
-    if (native instanceof HTMLElement) {
-      const css = this.ngCss.css;
-      if (css) {
-        for (let prop in css) {
-          if (css.hasOwnProperty(prop)) {
-            native.style[prop] = css[prop];
-          }
-        }
-      }
+    constructor(private _elementRef: ElementRef) {
+        this._nativeElement = _elementRef.nativeElement;
     }
-  }
+
+    ngAfterViewInit() {
+        if (this.ngCss instanceof Array) {
+            this.ngCss.forEach(ngCssElement => {
+                if (ngCssElement.apply) {
+                    this.applyStyles(ngCssElement.css);
+                }
+            });
+        } else {
+            if (this.ngCss.apply) {
+                this.applyStyles(this.ngCss.css);
+            }
+        }
+    }
+
+    ngOnChanges(changes: SimpleChanges) { }
+
+    private applyStyles(css: any) {
+        if (css) {
+            for (const key in css) {
+                if (css.hasOwnProperty(key)) {
+                    this._nativeElement.style[key] = css[key];
+                }
+            }
+        }
+    }
 
 }
