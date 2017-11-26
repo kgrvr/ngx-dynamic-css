@@ -1,13 +1,14 @@
 import { Directive, Input, AfterViewInit, OnChanges, ElementRef } from '@angular/core';
 
+// Models
+import { NgCssModel } from '../interfaces/ngCss.model';
+
 @Directive({
   selector: '[ngCss]'
 })
 export class CssDirectiveDirective implements AfterViewInit, OnChanges {
 
-  @Input() ngCss: {
-    css: any
-  };
+  @Input() ngCss: NgCssModel;
 
   constructor(private _elementRef: ElementRef) { }
 
