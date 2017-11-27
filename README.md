@@ -16,12 +16,58 @@ HTML Template:
 Typescript: 
 
     ngCss: NgCssModel = {
+	    apply: true,
 	    css: {
 	      'color': 'red',
-	      'font-size': '50px',
-	      'a': 'a'
+	      'font-size': '50px'
 	    }
     };
+
+
+----------
+
+
+Or you can pass an array to it too:
+Typescript:
+
+    ngCssSingle: NgCssModel = {
+        apply: true,
+        css: {
+            'text-align': 'left',
+        }
+    };
+
+    ngCss: NgCssModel[] = [
+        {
+            apply: true,
+            css: {
+                'color': 'red',
+            }
+        },
+        {
+            apply: true,
+            css: {
+                'font-size': '50px',
+            }
+        }
+    ];
+
+HTML template:
+
+    <h1 [ngCss]='ngCssSingle'>
+	    Welcome to NgxDynamicCss!
+    </h1>
+    <h2 [ngCss]='ngCss'>This is h2 tag</h2>
+
+
+----------
+
+## Properties:
+
+ - `apply` =  Whether to apply CSS properties or not
+	 - Type: `Boolean`
+ - `css` = Actual CSS properties in Key Value format
+	 - Type: `{ 'key': 'value' }`
 
 ## Build:
 Run "npm run packager" to package directive to dist folder.
